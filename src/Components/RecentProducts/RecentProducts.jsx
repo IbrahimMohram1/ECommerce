@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom'
 import ProductDetails from '../ProductDetails/ProductDetails.jsx'
 import { CartContext } from '../../Context/CartContext.jsx'
 import { WishlistContext } from '../../Context/WishlistContext.jsx'
+import Lodaing from '../Loader/Lodaing.jsx'
 
 
 export default function RecentProducts({ product }) {
-  let { AddToCart } = useContext(CartContext)
-  let { AddtoWishList, wishList } = useContext(WishlistContext)
-
+  let { AddToCart , getCart} = useContext(CartContext)
+  let { AddtoWishList, wishList , cartLoading , getWishList } = useContext(WishlistContext)
+  useEffect(()=>{
+    getWishList()
+    getCart()
+  },[])
   return <>
-    <div className=" product px-2 py-4 max-sm:w-full max-md:w-1/3 md:w-1/4 lg:w-1/6 ">
+  {cartLoading ? <Lodaing/> :   <div className=" product px-2 py-4 max-sm:w-full sm:my-8 max-md:w-1/3 md:w-1/4 lg:w-1/6 ">
       <div>
         <Link to={`productdetails/${product.id}`}>
           <img src={product.imageCover} className='w-full' alt={product.title} />
@@ -26,6 +30,7 @@ export default function RecentProducts({ product }) {
 
       <i onClick={() => AddtoWishList(product.id)} className={`fa-solid fa-heart ${wishList?.some((item) => item.id === product.id) ? `text-red-500` : 'text-black'} `}></i>
 
-    </div>
+    </div>}
+  
   </>
 }

@@ -44,10 +44,8 @@ const [categories, setCategories] = useState([])
   async function getCategiores(){
     try {
           let {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/categories`)
-  console.log(data);
   setCategories(data.data)
     } catch (error) {
-        console.log(error);
     }
 
 }

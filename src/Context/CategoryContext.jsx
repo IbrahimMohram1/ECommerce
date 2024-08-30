@@ -14,7 +14,6 @@ const [category, setCategory] = useState(null)
             setLoading(true)
             let {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/categories`)
             setCategory(data.data)
-            console.log(data.data);
                         setLoading(false)
 
         } catch (error) {

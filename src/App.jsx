@@ -24,6 +24,9 @@ import WishList from './Components/WishList/WishList.jsx'
 import CategoryContextProvider from './Context/CategoryContext.jsx'
 import BrandsContextProvider from './Context/BrandsContext.jsx'
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword.jsx'
+import VeridyCode from './Components/VerifyCode/VeridyCode.jsx'
+import ResetPassword from './Components/RestPassword/ResetPassword.jsx'
 
 
 let routers = createBrowserRouter([
@@ -39,26 +42,31 @@ let routers = createBrowserRouter([
     {path:'productdetails/:id' , element: <ProtectedRoute><ProductDetails/></ProtectedRoute>},
     {path:'login' , element: <Login/>},
     {path:'register' , element: <Register/>},
+    {path:'forgetpassword' , element: <ForgetPassword/>},
+    {path:'verfiyCode' , element: <VeridyCode/>},
+    {path:'restpassword' , element: <ResetPassword/>},
     {path:'*' , element: <ProtectedRoute><Notfound/></ProtectedRoute>},
   ]}
 ])
 let query = new QueryClient()
 function App() {
 
-  return <QueryClientProvider client={query}>
+  return <UserContextProvider>
+    <QueryClientProvider client={query}>
   <WishListContextProvider>
   <CartContextProvider>
-  <UserContextProvider>
+ 
     <CategoryContextProvider>
       <BrandsContextProvider>
    <RouterProvider router={routers}></RouterProvider>
    <Toaster />
    </BrandsContextProvider>
    </CategoryContextProvider>
-  </UserContextProvider>
   </CartContextProvider>
   </WishListContextProvider>
 </QueryClientProvider>
+  </UserContextProvider>
+
   
   
 

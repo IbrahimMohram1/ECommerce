@@ -71,7 +71,7 @@ export default function Navbar() {
         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 1h15M1 7h15M1 13h15" />
       </svg>
     </button>
-    {openModal ?     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+    {openModal ?   <div className="visible w-full md:block md:w-auto" id="navbar-default">
       <ul className="font-medium flex flex-col  md:flex-row md:space-x-2.5 ">
             {userData &&  <><li><NavLink to="">Home</NavLink></li>
             <li><NavLink to="products">products</NavLink></li>
@@ -94,7 +94,7 @@ export default function Navbar() {
             <li><NavLink to="register">Register</NavLink></li></>
 }
       </ul>
-    </div> :     <div className="visible w-full md:block md:w-auto" id="navbar-default">
+    </div> :     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul className="font-medium flex flex-col  md:flex-row md:space-x-2.5 ">
             {userData &&  <><li><NavLink to="">Home</NavLink></li>
             <li><NavLink to="products">products</NavLink></li>

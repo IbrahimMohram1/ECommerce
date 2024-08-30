@@ -1,18 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import style from './Products.module.css'
 import useProduct from '../../Hooks/useProduct'
 import { Link } from 'react-router-dom'
 import { WishlistContext } from '../../Context/WishlistContext'
+import Lodaing from '../Loader/Lodaing'
+import { CartContext } from '../../Context/CartContext'
 
 export default function Products() {
-  let { AddtoWishList, wishList } = useContext(WishlistContext)
-
+  let { AddtoWishList, wishList ,cartLoading    } = useContext(WishlistContext)
+let {AddToCart} = useContext(CartContext)
 let {data} = useProduct()
 
 
     
   return <>
-  <div className='container'>
+  {data && cartLoading ?<Lodaing/> : <div className='container'>
      <div className="flex flex-wrap justify-center">
       {data?.map((product)=>  <div key={product.id} className=" product px-2 py-4 max-sm:w-full max-md:w-1/3 md:w-1/4 lg:w-1/6 ">
       <div>
@@ -32,7 +34,8 @@ let {data} = useProduct()
 
     </div>)}
     </div>
-    </div>
+    </div>  }
+  
 
   </>
 }

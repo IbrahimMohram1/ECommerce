@@ -15,9 +15,6 @@ export default function useProduct() {
     select:(data)=>data?.data?.data
   })
 
-
   return response
-
-
 
 }

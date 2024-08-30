@@ -17,10 +17,6 @@ export default function Home() {
 
 let {data} = useProduct()
 
-  useEffect(()=>{
-    getWishList()
-    getCart()
-  },[])
 
 
   return <>

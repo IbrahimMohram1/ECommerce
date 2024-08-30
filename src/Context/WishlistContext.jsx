@@ -13,23 +13,29 @@ export default function WishListContextProvider({children}){
     async function AddtoWishList(productId){
         setCartLoading(true)
         let {data} = await axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`, {productId},{headers});
-        if(wishList.some((item) => item.id === productId )){
+        if(wishList?.some((item) => item.id === productId )){
                 RemoveFromWishList(productId)
         }
-                else if (wishList.filter((item) => item.id !== productId )) {
+                else if (wishList?.filter((item) => item.id !== productId )) {
+               setCartLoading(true)
                 setWishList(data.data)
-                toast.success(data.message)
                 getWishList()
+                toast.success(data.message)
          }
-        setCartLoading(false)
+                 setCartLoading(false)
      }
 
        async function getWishList(){
-        setCartLoading(true)
+        try {
+                 setCartLoading(true)
         let {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/wishlist`,{headers});
-        setWishList(data.data)
-        setCartLoading(false)
+        setWishList(data.data)   
+        } catch (error) {
+                console.log(error);
+                        setCartLoading(false)
 
+        }
+    
      }
 
 
@@ -37,7 +43,6 @@ export default function WishListContextProvider({children}){
         setCartLoading(true)
 
         let {data} = await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`,{headers});
-console.log(data);
         setWishList(data.data)   
         toast.success(data.message)
         getWishList()
@@ -45,7 +50,7 @@ console.log(data);
 
      }
 
-        return <WishlistContext.Provider value={{AddtoWishList , RemoveFromWishList , getWishList , cartLoading , wishList }}>
+        return <WishlistContext.Provider value={{AddtoWishList , RemoveFromWishList , getWishList , cartLoading , wishList , setCartLoading }}>
             {children}
 </WishlistContext.Provider>
 }

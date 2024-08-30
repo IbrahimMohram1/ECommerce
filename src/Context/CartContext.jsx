@@ -1,24 +1,23 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { WishlistContext } from "./WishlistContext.jsx";
 
 export let CartContext = createContext();
 export default function CartContextProvider({ children }){
     let headers = {token: localStorage.getItem('userToken')}
     const [cartProducts, setCartProducts] = useState(null)
-    const [cartLoading, setCartLoading] = useState(false)
+    let {cartLoading , setCartLoading} = useContext(WishlistContext)
 
     async function AddToCart(productId){
         try {
             setCartLoading(true)
             let {data} = await axios.post(`https://ecommerce.routemisr.com/api/v1/cart`, {productId},{headers});
-            console.log(data);
+                        setCartLoading(false)
             toast.success(data.message)
             setCartProducts(data)
-            setCartLoading(false)
 
         } catch (error) {
-            console.log(error);
             toast.error(data.message)
             setCartLoading(false)
 
@@ -29,13 +28,11 @@ export default function CartContextProvider({ children }){
         try {
             setCartLoading(true)
             let {data} = await axios.get(`https://ecommerce.routemisr.com/api/v1/cart`, {headers});
-            console.log(data);
       
             setCartProducts(data)
             setCartLoading(false)
 
         } catch (error) {
-            console.log(error);
             setCartLoading(false)
 
         }
@@ -45,12 +42,10 @@ export default function CartContextProvider({ children }){
                      try {
             setCartLoading(true)
             let {data} = await axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`,{count}, {headers});
-            console.log(data);
     
             setCartProducts(data)
             setCartLoading(false)
         } catch (error) {
-            console.log(error);
             setCartLoading(false)
 
         }
@@ -64,12 +59,10 @@ export default function CartContextProvider({ children }){
         try {
             setCartLoading(true)
             let {data} = await axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {headers});
-            console.log(data);
     
             setCartProducts(data)
             setCartLoading(false)
         } catch (error) {
-            console.log(error);
             setCartLoading(false)
 
 
@@ -80,10 +73,8 @@ export default function CartContextProvider({ children }){
             let {data} = await axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartProducts.data._id}?url=http://localhost:5173` , {shippingAddress} , {
                 headers
             })
-            console.log(data);
             window.location.href = data.session.url
         } catch (error) {
-            console.log(error);
         }
     }
 
@@ -91,7 +82,6 @@ export default function CartContextProvider({ children }){
         try {
             setCartLoading(true)
             let {data} = await axios.delete(`https://ecommerce.routemisr.com/api/v1/cart`,{headers});
-            console.log(data);
             setCartProducts(null)
             setCartLoading(false)
 

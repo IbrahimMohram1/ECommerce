@@ -6,19 +6,21 @@ import { Link } from 'react-router-dom'
 
 export default function Cart() {
 
-  let {getCart , cartProducts , setCartProducts , UpdatProductQuntity , cartLoading , RemoveProduct} = useContext(CartContext)
+  let {getCart , cartProducts , clearCart , UpdatProductQuntity , cartLoading , RemoveProduct} = useContext(CartContext)
 
       useEffect(()=> {
         getCart()
       }, [])
   return <>
-  <h1>Cart</h1>
-    {cartLoading ? <Lodaing/> : <div className='w-3/4 mx-auto p-3'>
-      {cartProducts ? <div className="relative  overflow-x-auto shadow-md sm:rounded-lg mt-15">
-  <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    {cartLoading ? <Lodaing/> : <div className='container  max-sm:py-8'>
+    {cartProducts?.numOfCartItems > 0 ? <div className='w-full mx-auto  max-sm:w-full '>
+      <h1 className='my-5 text-2xl font-semibold	'>Your Cart</h1>
+
+       <div className="relative  overflow-x-auto shadow-md sm:rounded-lg mt-15">
+  <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 max-sm:w-full">
     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
-        <th scope="col" className="px-16 py-3">
+        <th scope="col" className="px-6 py-3">
           Image
         </th>
         <th scope="col" className="px-6 py-3">
@@ -37,13 +39,13 @@ export default function Cart() {
     </thead>
     <tbody>
       {cartProducts?.data.products.map((product)=>   <tr key={product.product.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td className="p-4">
+        <td className="">
           <img src={product.product.imageCover} className="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch" />
         </td>
-        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+        <td className=" max-sm:px-3 py-4 font-semibold text-gray-900 dark:text-white">
           {product.product.title}
         </td>
-        <td className="px-6 py-4">
+        <td className="">
           <div className="flex items-center">
             <button onClick={()=>(UpdatProductQuntity(product.product.id , product.count-1))} className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
               <span className="sr-only">Quantity button</span>
@@ -65,7 +67,7 @@ export default function Cart() {
         <td className="px-3 py-4 font-semibold text-gray-900 dark:text-white">
           {product.price } EGP
         </td>
-        <td className="px-6 py-4">
+        <td className=" max-sm:px-2 px-6 py-4">
           <button onClick={()=>{RemoveProduct(product.product.id)}}  className="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
         </td>
         
@@ -83,16 +85,17 @@ export default function Cart() {
       <span>{cartProducts?.data.totalCartPrice}</span>
      </div>
 <div className='m-3 '>
-       <Link to={'/checkout'} className=' w-full bg-main  text-white px-2 py-2 rounded-md' >CheckOut </Link>
+  <button className=' w-full bg-main  text-white px-2 py-2 rounded-md'><Link to={'/checkout'}></Link> CheckOut</button>
 
 </div>
+<div className='m-3 '>
+    <button className='w-full bg-red-600 text-white px-2 py-2 rounded-md' onClick={clearCart}> Clear Cart </button>
+</div>
 
-</div> : <h2 className='text-2xl text-black font-bold text-center'>Card Is Empty</h2>}
 
-
-
-    </div>}
-
-  
+</div>  </div> : <h1 className='text-2xl fw-semibold'>No Products Added To Cart </h1>   
+}
+</div >
+}
   </>
 }
