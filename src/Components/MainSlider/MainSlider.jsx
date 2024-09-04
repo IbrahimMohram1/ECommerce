@@ -19,14 +19,14 @@ export default function MainSlider() {
   <div className="flex ">
     <div className="w-3/4  max-sm:w-full  lg:w-3/4">
         <Slider {...settings}>
-  <img src={slideImg1} className=' w-full h-[400px]'/>
-  <img src={slideImg2} className=' w-full h-[400px]'/>
-  <img src={slideImg3} className=' w-full h-[400px]'/>
+  <img src={slideImg1} className=' w-full h-[350px]'/>
+  <img src={slideImg2} className=' w-full h-[350px]'/>
+  <img src={slideImg3} className=' w-full h-[350px]'/>
     </Slider>
     </div>
     <div className="w-1/4 max-sm:hidden lg:block">
-  <img src={slideImg2} className='w-full h-[200px]'/>
-  <img src={slideImg3} className='w-full h-[200px]'/>
+  <img src={slideImg2} className='w-full h-[175px]'/>
+  <img src={slideImg3} className='w-full h-[175px]'/>
 
     </div>
   </div>

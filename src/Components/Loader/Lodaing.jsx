@@ -12,7 +12,7 @@ export default function Lodaing() {
   wrapperStyle={{}}
   wrapperClass=""
   />
-  </div>
+  </div>  
 </div>
   </>
 }

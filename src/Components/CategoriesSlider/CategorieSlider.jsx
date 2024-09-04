@@ -55,8 +55,8 @@ getCategiores()
 },[])
   return <>
     <Slider {...settings}>
-  {categories?.map((category , index)=> <div  key={index} className='my-4 sm:w-full '>
-    <img  src={category.image} className='w-full mt-4 h-[200px]'/>
+  {categories?.map((category , index)=> <div  key={index} className='my-4 sm:w-full max-sm:h-[250px] '>
+    <img  src={category.image} className='w-full mt-4 h-[200px] max-sm:h-[250px]'/>
     <h3>{category.name}</h3>
   </div>)}
     </Slider>

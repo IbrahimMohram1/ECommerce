@@ -15,17 +15,20 @@ export default function Home() {
   let {getCart} = useContext(CartContext)
 
 
-let {data} = useProduct()
-
+let {data , isLoading} = useProduct()
+  useEffect(()=>{
+    getWishList()
+    getCart()
+  }, [])
 
 
   return <>
   <MainSlider/>
   <CategorieSlider/>
-    {data?.length ?   <div className='container'> <div className="flex flex-wrap justify-center">
-    {data?.map((product , index) =>    <RecentProducts key={index} product={product}/> )}
+    {isLoading?   <div className='flex justify-center py-16 '><Lodaing/></div> : <div className='container'> <div className="flex flex-wrap justify-center">
+    {data?.map((product , index) =>    <RecentProducts key={index} product={product} isLoading={isLoading}/> )}
 
-    </div> </div>: <div className='flex justify-center py-16 '><Lodaing/></div> }
+    </div> </div> }
   
   
   </>

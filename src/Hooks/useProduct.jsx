@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function useProduct() {
 
@@ -14,7 +14,9 @@ export default function useProduct() {
     queryFn:getProducts,
     select:(data)=>data?.data?.data
   })
-
+  useEffect(()=>{
+    console.log(response);
+  },[])
   return response
 
 }

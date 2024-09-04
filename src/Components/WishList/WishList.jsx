@@ -17,7 +17,7 @@ getWishList()
     }
   return<>
    
-        {cartLoading ? <Lodaing/> : <div className='container'>
+        {!wishList ? <Lodaing/> : <div className='container'>
              <div className='flex justify-center flex-wrap'>
             {wishList?.map((product , index)=>
             <div key={index} className='w-1/4 product my-15 p-3 max-sm:w-full max-md:w-1/3 md:w-1/4 lg:w-1/6'>
