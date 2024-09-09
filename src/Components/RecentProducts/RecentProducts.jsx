@@ -8,7 +8,7 @@ import Lodaing from '../Loader/Lodaing.jsx'
 
 export default function RecentProducts({ product }) {
   let { AddToCart } = useContext(CartContext)
-  let { AddtoWishList, wishList  } = useContext(WishlistContext)
+  let { AddtoWishList, wishList , getWishList } = useContext(WishlistContext)
 
   return <>
 

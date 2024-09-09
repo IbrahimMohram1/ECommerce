@@ -27,6 +27,7 @@ import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-quer
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword.jsx'
 import VeridyCode from './Components/VerifyCode/VeridyCode.jsx'
 import ResetPassword from './Components/RestPassword/ResetPassword.jsx'
+import { Offline, Online } from 'react-detect-offline'
 
 
 let routers = createBrowserRouter([
@@ -52,6 +53,7 @@ let query = new QueryClient()
 function App() {
 
   return <UserContextProvider>
+    
     <QueryClientProvider client={query}>
   <WishListContextProvider>
   <CartContextProvider>
@@ -60,6 +62,12 @@ function App() {
       <BrandsContextProvider>
    <RouterProvider router={routers}></RouterProvider>
    <Toaster />
+    <Offline>
+      
+      <div className='bg-red-600 text-white p-4 fixed bottom-0 left-0'>Only shown offline (surprise!)</div>
+      </Offline>
+
+
    </BrandsContextProvider>
    </CategoryContextProvider>
   </CartContextProvider>

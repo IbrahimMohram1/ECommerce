@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query'
 import useProduct from '../../Hooks/useProduct.jsx'
 
 export default function Home() {
-  let {getWishList} = useContext(WishlistContext)
+  let {getWishList , wishList} = useContext(WishlistContext)
   let {getCart} = useContext(CartContext)
 
 
